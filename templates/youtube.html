@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="slim-mainpanel">
+  <div class="container">
+    <div class="section-wrapper mg-t-20">
+      <label class="section-title">Youtube Vidéos</label>
+      <p class="mg-sm-b-40">Analyse des sentiments avec <a href="https://cran.r-project.org/web/packages/vader/index.html">Vader</a></p>
+  
+      <div class="row">
+        
+        {% for candidat in candidat_data %}
+        <div class="col-lg-4 mg-t-20" >
+          <div class="card bd-0">
+            <iframe height="200" src="https://www.youtube.com/embed/{{candidat['id_video']}}"></iframe>
+            <div class="card-body bd bd-t-0">
+              <h6 class="position-name">{{candidat['nom']}}</h6>
+              <p>
+                Emission : <b class="tx-primary">{{candidat['emission']}}</b><br>
+                {{candidat['date_emission']}}
+              </p>
+              <div class="card">
+                <div class="card-header" role="tab" id="headingTwo">
+                  <a class="tx-gray-800 transition collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse{{candidat['vid_id']}}" aria-expanded="false" aria-controls="collapse{{candidat['vid_id']}}">
+                    Résulats de l'analyse
+                  </a>
+                </div>
+                <div id="collapse{{candidat['vid_id']}}" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                  <div class="card-body">
+                    {% if candidat['avis_pos'] > candidat['avis_neg'] %}
+                    <h1 class="invoice-title">Positif</h1>
+                    {% else %}
+                    <h1 class="invoice-title">Négatif</h1>
+                    {% endif %}
+                    Nombre de commentaires : {{candidat['nb_comments']}}<br>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div><!-- card -->
+        </div><!-- col-4 -->
+        {% endfor %}
+      </div><!-- row -->
+  </div><!-- section-wrapper -->
+  </div>
+</div>
+
+{% endblock %}

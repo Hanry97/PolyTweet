@@ -1,0 +1,282 @@
+<!-- Header-->
+<!DOCTYPE html>
+<html lang="fr">
+
+<!-- Mirrored from themepixels.me/demo/slim1.1/template/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Dec 2021 18:13:55 GMT -->
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{% block title %} {% endblock %}</title>
+
+    <!-- vendor css -->
+    <link href="{{ url_for('static', filename= 'lib/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename= 'lib/Ionicons/css/ionicons.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename= 'lib/rickshaw/css/rickshaw.min.css') }}" rel="stylesheet">
+
+    <!-- Slim CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/slim.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <div class="slim-header">
+      <div class="container">
+        <div class="slim-header-left">
+          <h2 class="slim-logo"><a href="{{url_for('index')}}">Poly<span>tweets</span></a></h2>
+
+          <div class="search-box">
+            <input type="text" class="form-control" placeholder="Search">
+            <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+          </div><!-- search-box -->
+        </div><!-- slim-header-left -->
+
+        <div class="slim-header-right">
+          <div class="dropdown dropdown-a">
+            <a href="#" class="header-notification" data-toggle="dropdown" id="bell-notif">
+              <i class="icon fas fa-bell"></i>
+              
+            </a>
+            <div class="dropdown-menu">
+              <div class="dropdown-menu-header">
+                <h6 class="dropdown-menu-title">Activity Logs</h6>
+                <div id="deleteLog">
+                  <a href="#">Effacer</a>
+                </div>
+              </div><!-- dropdown-menu-header -->
+              <div class="dropdown-activity-list" id="list-log">
+                <div class="activity-label">Aujourd'hui, {{date}}</div>
+              </div><!-- dropdown-activity-list -->
+            </div><!-- dropdown-menu-right -->
+          </div><!-- dropdown -->
+          <div class="dropdown dropdown-c">
+            {% if session['username'] %} 
+            <a href="#" class="logged-user" data-toggle="dropdown">
+              <img src="{{ url_for('static', filename= 'img/hanry.jpg') }}" alt="">
+              <span>Hanry</span>
+              <i class="fa fa-angle-down"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <nav class="nav">
+                <a href="#" class="nav-link">Tableau de bord</a>
+                <a href="{{url_for('logout')}}" class="nav-link"> Déconnexion</a>
+              </nav>
+            </div><!-- dropdown-menu -->
+            {% endif %}
+            {% if not session['username'] %}
+            <a href="#" class="logged-user" data-toggle="modal" data-target="#modaldemo6">
+              <img src="{{ url_for('static', filename= 'img/user-photo.jpeg') }}" alt="">
+              <span>Connexion</span>
+              <i class="fa fa-lock"></i>
+            </a>
+            {% endif %}
+          </div><!-- dropdown -->
+        </div><!-- header-right -->
+      </div><!-- container -->
+    </div><!-- slim-header -->
+
+    <div class="slim-navbar">
+      <div class="container">
+        <ul class="nav">
+          {% if session['page'] == "twitter" %}
+          <li class="nav-item active">
+          {% else %}
+          <li class="nav-item">
+          {% endif %}
+            <a class="nav-link" href="{{url_for('index')}}">
+              <i class="icon fab fa-twitter"></i>
+
+              <span>Twitter</span>
+            </a>
+          </li>
+          {% if session['page'] == "youtube" %}
+          <li class="nav-item active">
+          {% else %}
+          <li class="nav-item">
+            {% endif %}
+            <a class="nav-link" href="{{url_for('youtube')}}">
+              <i class="icon fab fa-youtube"></i>
+              <span>Youtube</span>
+            </a>
+          </li>
+          {% if session['username'] %} 
+          <li class="nav-item">
+            <a class="nav-link" href="#modalvideo" data-toggle="modal" data-effect="effect-super-scaled">
+              <i class="icon fas fa-play-circle"></i>
+              <span>Add Youtube Video</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#modaldemo8" data-toggle="modal" data-effect="effect-super-scaled">
+              <i class="icon fas fa-user-plus"></i>
+              <span>Add candidat</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="updateTweet" data-state="{{ update_state }}">
+              {% if update_state == 0 %}
+              <i class="icon fas fa-download update_icon"></i>
+              {% endif %}
+              {% if update_state == 1 %}
+              <i class="icon fas fa-sync fa-spin update_icon"></i>
+              {% endif %}
+              <span>Update tweets</span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div><!-- container -->
+    </div><!-- slim-navbar -->
+    <div id="modaldemo8" class="modal fade">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Ajouter un candidat</h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+            <div class="modal-content">
+              <div class="modal-body">
+                <p>Candidat à l'élection présidentielle 2022</p>
+                <form id="formAddPerson">
+                  <div class="col-6 mb-3">
+                    <label class="form-label" for="modalInputPartiPolitique">Parti politique</label>
+                    <input class="form-control" id="modalInputPartiPolitique" name="partipoli" type="text" aria-describedby="PartiPolitiqueHelp" required>
+                    <div class="form-text" id="PartiPolitiqueHelp"></div>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <label class="form-label" for="modalInputTwitter">Compte Twitter</label>
+                    <input class="form-control" id="modalInputTwitter" name="comptetwitter" type="text" aria-describedby="TwitterHelp" required>
+                    <div class="form-text" id="TwitterHelp">sans @ ex : HanryNzale</div>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <label class="form-label" for="modalInputPhoto">URL Photo</label>
+                    <input class="form-control" id="modalInputPhoto" name="urlphoto" type="text" aria-describedby="PhotoHelp" required>
+                    <div class="form-text" id="PhotoHelp">ex : https://hanry.fr/hanry.jpeg</div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="addCandidat">Enregistrer</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div><!-- modal-dialog -->
+    </div><!-- modal -->
+    <div id="modaldemo6" class="modal fade">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content bd-0 bg-transparent rounded overflow-hidden">
+          <div class="modal-body pd-0">
+            <div class="row no-gutters">
+              <div class="col-lg-6 bg-primary">
+                <div class="pd-40">
+                  <h1 class="tx-white mg-b-20">Poly Feelings Analysis</h1>
+                  <p class="tx-white op-7 mg-b-30">French Presidential Election Sentiment Analysis.</p>
+                </div>
+              </div><!-- col-6 -->
+              <div class="col-lg-6 bg-white">
+                <div class="pd-y-30 pd-xl-x-30">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <div class="pd-x-30 pd-y-10">
+                    <h3 class="tx-gray-800 tx-normal mg-b-5">Welcome back!</h3>
+                    <p>Saisissez vous identifiants pour continuer</p>
+                    <br>
+                    <div class="form-group">
+                      <input id="login-username" type="text" name="loginUsername" class="form-control pd-y-12" placeholder="Nom d'utilisateur" required>
+                    </div><!-- form-group -->
+                    <div class="form-group mg-b-20">
+                      <input id="login-password" type="password" name="loginPassword" class="form-control pd-y-12" placeholder="Mot de passe" required>
+                      <a href="#" class="tx-12 d-block mg-t-10">Mot de passe oublié?</a>
+                    </div><!-- form-group -->
+
+                    <button class="btn btn-primary pd-y-12 btn-block" id="login" type="button">Connexion</button>
+
+                    <div class="mg-t-30 mg-b-20" id="errorMessage"></div>
+                  </div>
+                </div><!-- pd-20 -->
+              </div><!-- col-6 -->
+            </div><!-- row -->
+          </div><!-- modal-body -->
+        </div><!-- modal-content -->
+      </div><!-- modal-dialog -->
+    </div><!-- modal -->
+    <div id="modalvideo" class="modal fade">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Ajouter une vidéo</h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+            <div class="modal-content">
+              <div class="modal-body">
+                <p>Candidat à l'élection présidentielle 2022</p>
+                <form id="formAddPerson">
+                  <div class="col-8 mb-3">
+                    <label class="form-label" for="candidat_id">Candidat <span class="tx-danger">*</span></label>
+                    <select class="form-control select2" data-placeholder="Sélectionner un candidat" name="candidat_id" id="candidat_id" aria-describedby="CandidatHelp" required>
+                      <option label="Sélectionner un candidat"></option>
+                      {% for candidat in candidats %}
+                      <option value="{{ candidat['id'] }}">{{ candidat['nom'] }}</option>
+                      {% endfor %}
+                    </select>
+                    <div class="form-text" id="CandidatHelp"></div>
+                  </div>
+                  <div class="col-8 mb-3">
+                    <label class="form-label" for="modalInputEmission">Emission <span class="tx-danger">*</span></label>
+                    <input class="form-control" id="modalInputEmission" name="emission" type="text" aria-describedby="EmissionHelp" required>
+                    <div class="form-text" id="EmissionHelp"></div>
+                  </div>
+                  <div class="col-8 mb-3">
+                    <label class="form-label" for="modalInputVideo">URL Vidéo <span class="tx-danger">*</span></label>
+                    <input class="form-control" id="modalInputVideo" name="urlvideo" type="text" aria-describedby="VideoHelp" required>
+                    <div class="form-text" id="VideoHelp">ex : https://youtu.be/Mvaosumc4hU</div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="addVideo">Enregistrer</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div><!-- modal-dialog -->
+    </div><!-- modal -->
+
+<!-- Header -->
+          <!-- Contenu -->
+          {% block content %} {% endblock %}
+          <!-- Contenu -->
+    <!-- Page Footer-->
+
+    <div class="slim-footer">
+      <div class="container">
+        <p>Copyright 2021 &copy; All Rights Reserved. PolyTweet</p>
+        <p>Designed by: <a href="http://themepixels.me/demo/slim1.1/template/index.html">ThemePixels</a></p>
+      </div><!-- container -->
+    </div><!-- slim-footer -->
+
+    <script src="{{ url_for('static', filename= 'lib/jquery/js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'lib/popper.js/js/popper.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'lib/bootstrap/js/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'lib/jquery.cookie/js/jquery.cookie.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'lib/d3/js/d3.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'lib/rickshaw/js/rickshaw.min.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'lib/Flot/js/jquery.flot.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'lib/Flot/js/jquery.flot.resize.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'lib/peity/js/jquery.peity.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'lib/chart.js/js/Chart.js') }}"></script>
+
+    <script src="{{ url_for('static', filename= 'js/slim.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'js/ResizeSensor.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'js/script_home.js') }}"></script>
+  </body>
+
+</html>
+      

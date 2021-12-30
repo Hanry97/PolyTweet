@@ -1,0 +1,17 @@
+https://larevueia.fr/nlp-avec-python-analyse-de-sentiments-sur-twitter/
+https://fr.acervolima.com/analyse-des-sentiments-twitter-a-laide-de-python/
+https://medium.com/@pragya_paudyal/scraping-tweet-using-twint-and-analyzing-with-nlp-932e01ad5587
+https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3-fr
+https://github.com/ajinkyachavan/Emoticon-Based-Sentiment-Analysis-Python/blob/master/sentimentAnalysis.py
+negative-positive french words https://github.com/edevouge/tweetmon
+
+pip3 freeze > requirements.txt
+
+venv\Scripts\activate
+$env:FLASK_APP = "app"
+flask run
+
+base de données
+python init_db.py (script de création de la database)
+
+pip3 install googletrans==3.1.0a0

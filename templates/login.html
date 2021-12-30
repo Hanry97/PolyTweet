@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %} {% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+    <!-- Google fonts - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <!-- Choices CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/choices.min.css') }}">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.default.css') }}" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{{ url_for('static', filename= 'img/favicon.ico') }}">
+  </head>
+  <body>
+    <div class="login-page">
+      <div class="container d-flex align-items-center position-relative py-5">
+        <div class="card shadow-sm w-100 rounded overflow-hidden bg-none">
+          <div class="card-body p-0">
+            <div class="row gx-0 align-items-stretch">
+              <!-- Logo & Information Panel-->
+              <div class="col-lg-6">
+                <div class="info d-flex justify-content-center flex-column p-4 h-100">
+                  <div class="py-5">
+                    <h1 class="display-6 fw-bold">Poly Twitter Feelings Analysis</h1>
+                    <p class="fw-light mb-0">French Presidential Election Sentiment Analysis.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Form Panel    -->
+              <div class="col-lg-6 bg-white">
+                <div class="d-flex align-items-center px-4 px-lg-5 h-100">
+                  <form class="login-form py-5 w-100" method="get" action="index.html">
+                    <div class="input-material-group mb-3">
+                      <input class="input-material" id="login-username" type="text" name="loginUsername" placeholder="User Name" autocomplete="off" required data-validate-field="loginUsername">
+                    </div>
+                    <div class="input-material-group mb-4">
+                      <input class="input-material" id="login-password" type="password" name="loginPassword" placeholder="Password" required data-validate-field="loginPassword">
+                    </div>
+                    <button class="btn mb-3" id="login" type="button">Connexion</button>
+                    <br>
+                    <a class="text-sm textBlueDark" href="#">Mot de passe oublié?</a>
+                    <br>
+                    <small id="errorMessage"></small>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center position-absolute bottom-0 start-0 w-100 z-index-20">
+        <p class="text-white">Design by <a class="external" href="https://bootstrapious.com/p/admin-template">Bootstrapious</a>
+          <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+        </p>
+      </div>
+    </div>
+    <!-- JavaScript files-->
+    <script type="text/javascript" src="{{ url_for('static', filename= 'js/bootstrap.bundle.min.js') }}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename= 'js/choices.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename= 'js/script.js') }}"></script>
+    <!-- Main File-->
+    <script> 
+      
+      
+    </script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  </body>
+</html>

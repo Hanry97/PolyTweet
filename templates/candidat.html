@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="slim-mainpanel">
+  <div class="container">
+    <div class="slim-pageheader">
+      <ol class="breadcrumb slim-breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Candidat</li>
+      </ol>
+      <h6 class="slim-pagetitle">Candidat</h6>
+    </div><!-- slim-pageheader -->
+
+    <div class="row row-sm">
+      <div class="col-lg-8">
+        <div class="card card-profile">
+          <div class="card-body">
+            <div class="media">
+              <img src="{{ candidat['url_photo'] }}" alt="">
+              <div class="media-body">
+                <h3 class="card-profile-name">{{ candidat['nom'] }}</h3>
+                <p class="card-profile-position">{{ candidat['parti_poli'] }}</p>
+                <p>France</p>
+
+                <p class="mg-b-0">Tweets : <spann class="tx-primary">{{ candidat['count_tweets'] }}</spann> | Followers : <spann class="tx-primary">{{ candidat['count_followers'] }}</spann> | Followings : <spann class="tx-primary">{{ candidat['count_following'] }}</spann></p>
+              </div><!-- media-body -->
+            </div><!-- media -->
+          </div><!-- card-body -->
+          <div class="card-footer">
+            <div>
+              <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/{{candidat['twitter_username']}}">Twitter</a>
+            </div>
+          </div><!-- card-footer -->
+        </div><!-- card -->
+
+        <div class="card card-latest-activity mg-t-20">
+          <div class="card-body">
+            <div class="slim-card-title">Tweets sur les 7 derniers jours</div>
+            <canvas class="mg-t-20" id="ChartWeek"></canvas>
+          </div><!-- card-body -->
+        </div><!-- card -->
+
+        <div class="card card-latest-activity mg-t-20">
+          <div class="card-body">
+            <div class="slim-card-title">Analyse des sentiments</div>
+            <div class="row mg-t-20">
+              <div class="col-md-6">
+                <div class="bd pd-t-30 pd-b-20 pd-x-20"><canvas id="ChartVader" height="200"></canvas></div>
+                <div class="mg-t-30 mg-b-20 tx-12" style="text-align: center;">Analyse <a href="https://cran.r-project.org/web/packages/vader/index.html">Vader</a></div>
+              </div><!-- col-6 -->
+              <div class="col-md-6 mg-t-20 mg-md-t-0">
+                <div class="bd pd-t-30 pd-b-20 pd-x-20"><canvas id="ChartTextBlob" height="200"></canvas></div>
+                <div class="mg-t-30 mg-b-20 tx-12" style="text-align: center;">Analyse <a href="https://textblob.readthedocs.io/en/dev/">TextBlob</a></div>
+              </div><!-- col-6 -->
+            </div><!-- row -->
+          </div><!-- card-body -->
+        </div><!-- card -->
+
+        <div class="card card-recommendation mg-t-20">
+          <div class="card-body pd-25">
+            <div class="slim-card-title">Répartition géographique des tweets</div>
+              <embed class="mg-t-20" type="text/html" src="{{ url_for('static', filename= 'map.html') }}" width="100%" height="500">
+            </div><!-- card-body -->
+        </div>
+      </div><!-- col-8 -->
+
+      <div class="col-lg-4 mg-t-20 mg-lg-t-0">
+        <div class="card card-connection">
+          <div class="row row-xs">
+            <div class="col-4 tx-primary">129</div>
+            <div class="col-8">people viewed your profile in the past 90 days</div>
+        </div><!-- row -->
+        <hr>
+        <div class="row row-xs">
+          <div class="col-4 tx-purple">845</div>
+          <div class="col-8">
+            connections <br>
+            <a href="#">Grow your network</a>
+          </div>
+        </div><!-- row -->
+      </div><!-- card -->
+
+      <div class="card card-recent-messages mg-t-20">
+        <div class="card-header">
+          <span>Tweets récents sur le candidat</span>
+        </div><!-- card-header -->
+        <div class="list-group list-group-flush">
+          {% for tweet in last3_tweets %}
+          <div class="list-group-item">
+            <div class="media">
+              <img src="{{ url_for('static', filename= 'img/user-photo.jpeg') }}" alt="">
+              <div class="media-body">
+                <h6>{{ tweet['username'] }}</h6>
+                <p>{{ tweet['created_at'] }}</p>
+              </div><!-- media-body -->
+            </div><!-- media -->
+            <p class="msg">{{ tweet['tweet'] }}</p>
+          </div>
+          {% endfor %}
+        </div><!-- list-group -->
+      </div><!-- card -->
+
+      </div><!-- col-4 -->
+    </div><!-- row -->
+
+  </div><!-- container -->
+</div><!-- slim-mainpanel -->
+
+{% endblock %}
