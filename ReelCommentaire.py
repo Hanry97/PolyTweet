@@ -15,7 +15,7 @@ import math
 from googleapiclient.discovery import build
 from vaderSentiment_fr.vaderSentiment import SentimentIntensityAnalyzer
 
-key='AIzaSyDsvB630E5Sf1dAjw44PvqKcrV7ecA4iEM'
+key='xxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 
 
 class video:
