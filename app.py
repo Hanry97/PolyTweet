@@ -122,7 +122,7 @@ def get_all_candidates():
     return candidats
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'f896f2bfb5f5d5ee3d62ccc7cdfcc1a63074337a9ad9f166'
+app.config['SECRET_KEY'] = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 
 @app.context_processor
 def inject_update_state():
